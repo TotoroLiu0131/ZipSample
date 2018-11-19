@@ -63,8 +63,10 @@
     <Compile Include="src\Entities.cs" />
     <Compile Include="test\CastTests.cs" />
     <Compile Include="test\ConcatTests.cs" />
+    <Compile Include="test\DaoTests.cs" />
     <Compile Include="test\ExceptTests.cs" />
     <Compile Include="test\IntersectTests.cs" />
+    <Compile Include="test\MyLinq.cs" />
     <Compile Include="test\OfTypeTests.cs" />
     <Compile Include="test\Repository.cs" />
     <Compile Include="test\ReverseTests.cs" />

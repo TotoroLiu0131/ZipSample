@@ -11,18 +11,39 @@ namespace ZipSample.test
         [TestMethod]
         public void intersect_integers()
         {
-            var first = new List<int> { 1, 3, 5 };
-            var second = new List<int> { 5, 3, 7, 9 };
+            var first = new List<int> { 1, 3, 3, 5 };
+            var second = new List<int> { 5, 5, 3, 7, 9 };
 
             var expected = new List<int> { 3, 5 };
 
-            var actual = MyIntersect(first, second).ToList();
+            var actual = first.MyIntersect(second).ToList();
             expected.ToExpectedObject().ShouldEqual(actual);
         }
 
-        private IEnumerable<int> MyIntersect(IEnumerable<int> first, IEnumerable<int> second)
+
+        [TestMethod]
+        public void intersect_girls()
         {
-            throw new System.NotImplementedException();
+            var first = new List<Girl>()
+            {
+                new Girl(){ Name = "Amanda"},
+                new Girl(){ Name = "Lucy"}
+            };
+
+            var second = new List<Girl>()
+            {
+                new Girl() {Name = "Lucy"},
+                new Girl() {Name = "Xinyi"},
+            };
+
+            var expected = new List<Girl>()
+            {
+                new Girl() {Name = "Lucy"}
+            };
+
+            var actual = first.MyIntersect(second, new GirlEquality()).ToList();
+            expected.ToExpectedObject().ShouldEqual(actual);
         }
+
     }
 }

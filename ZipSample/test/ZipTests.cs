@@ -15,7 +15,7 @@ namespace ZipSample.test
             var girls = Repository.Get3Girls();
             var keys = Repository.Get5Keys();
 
-            var girlAndBoyPairs = MyZip(girls, keys).ToList();
+            var girlAndBoyPairs = girls.MyZip(keys, (first, second) => Tuple.Create<string, string>(first.Name, second.OwnerBoy.Name)).ToList();
             var expected = new List<Tuple<string, string>>
             {
                 Tuple.Create("Jean", "Joey"),
@@ -26,9 +26,20 @@ namespace ZipSample.test
             expected.ToExpectedObject().ShouldEqual(girlAndBoyPairs);
         }
 
-        private IEnumerable<Tuple<string, string>> MyZip(IEnumerable<Girl> girls, IEnumerable<Key> keys)
+        [TestMethod]
+        public void pair_5_girls_and_3_boys()
         {
-            throw new NotImplementedException();
+            var girls = Repository.Get5Girls();
+            var keys = Repository.Get3Keys();
+
+            var girlAndBoyPairs = keys.MyZip(girls,(first,second) => Tuple.Create(first.OwnerBoy.Name,second.Name)).ToList();
+            var expected = new List<Tuple<string, string>>
+            {
+                Tuple.Create("Joey","Jean"),
+                Tuple.Create("Frank","Mary"),
+                Tuple.Create("Bob","Karen"),
+            };
+            expected.ToExpectedObject().ShouldEqual(girlAndBoyPairs);
         }
     }
 }

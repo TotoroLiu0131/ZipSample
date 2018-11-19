@@ -15,7 +15,7 @@ namespace ZipSample.test
         public void cast_integers()
         {
             var arrayList = new ArrayList { 2, 6 };
-            var actual = MyCast(arrayList).ToList();
+            var actual = arrayList.MyCast<int>().ToList();
 
             var expected = new List<int> { 2, 6 };
             expected.ToExpectedObject().ShouldEqual(actual);
@@ -25,13 +25,12 @@ namespace ZipSample.test
         public void cast_integers_with_cast_failed()
         {
             var arrayList = new ArrayList { 2, "4", 6 };
-            Action action = () => MyCast(arrayList);
-            action.Should().Throw<InvalidCastException>();
+            Action action = () => arrayList.MyCast<int>().ToList();
+            action.Should().Throw<BenException>();
         }
+    }
 
-        private IEnumerable<int> MyCast(ArrayList arrayList)
-        {
-            throw new NotImplementedException();
-        }
+    public class BenException : Exception
+    {
     }
 }
